@@ -1,14 +1,14 @@
-// Root file: contracts\BabyOlympicCake.sol
+// Root file: contracts\FATSatoshi.sol
 
 // SPDX-License-Identifier: UNLICENSED
 
 // IERC20.sol
 pragma solidity ^0.8.5;
 
-// BabyOlympicCake
+// FATSatoshi
 // Hold and get rewarded in Doge
 // 3% LP, 7% DOGE REWARDS, 5% MARKETING | 15% TAX
-// Telegram : https://t.me/BabyOlympicCake
+// Telegram : https://t.me/FATSatoshi
 
 pragma solidity ^0.8.5;
 
@@ -110,7 +110,8 @@ abstract contract Context {
     }
 
     function _msgData() internal view virtual returns (bytes calldata) {
-        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
+        this;
+        // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
         return msg.data;
     }
 }
@@ -122,6 +123,7 @@ pragma solidity ^0.8.5;
 
 interface IUniswapV2Router01 {
     function factory() external pure returns (address);
+
     function WETH() external pure returns (address);
 
     function addLiquidity(
@@ -134,6 +136,7 @@ interface IUniswapV2Router01 {
         address to,
         uint deadline
     ) external returns (uint amountA, uint amountB, uint liquidity);
+
     function addLiquidityETH(
         address token,
         uint amountTokenDesired,
@@ -142,6 +145,7 @@ interface IUniswapV2Router01 {
         address to,
         uint deadline
     ) external payable returns (uint amountToken, uint amountETH, uint liquidity);
+
     function removeLiquidity(
         address tokenA,
         address tokenB,
@@ -151,6 +155,7 @@ interface IUniswapV2Router01 {
         address to,
         uint deadline
     ) external returns (uint amountA, uint amountB);
+
     function removeLiquidityETH(
         address token,
         uint liquidity,
@@ -159,6 +164,7 @@ interface IUniswapV2Router01 {
         address to,
         uint deadline
     ) external returns (uint amountToken, uint amountETH);
+
     function removeLiquidityWithPermit(
         address tokenA,
         address tokenB,
@@ -169,6 +175,7 @@ interface IUniswapV2Router01 {
         uint deadline,
         bool approveMax, uint8 v, bytes32 r, bytes32 s
     ) external returns (uint amountA, uint amountB);
+
     function removeLiquidityETHWithPermit(
         address token,
         uint liquidity,
@@ -178,6 +185,7 @@ interface IUniswapV2Router01 {
         uint deadline,
         bool approveMax, uint8 v, bytes32 r, bytes32 s
     ) external returns (uint amountToken, uint amountETH);
+
     function swapExactTokensForTokens(
         uint amountIn,
         uint amountOutMin,
@@ -185,6 +193,7 @@ interface IUniswapV2Router01 {
         address to,
         uint deadline
     ) external returns (uint[] memory amounts);
+
     function swapTokensForExactTokens(
         uint amountOut,
         uint amountInMax,
@@ -192,25 +201,33 @@ interface IUniswapV2Router01 {
         address to,
         uint deadline
     ) external returns (uint[] memory amounts);
+
     function swapExactETHForTokens(uint amountOutMin, address[] calldata path, address to, uint deadline)
     external
     payable
     returns (uint[] memory amounts);
+
     function swapTokensForExactETH(uint amountOut, uint amountInMax, address[] calldata path, address to, uint deadline)
     external
     returns (uint[] memory amounts);
+
     function swapExactTokensForETH(uint amountIn, uint amountOutMin, address[] calldata path, address to, uint deadline)
     external
     returns (uint[] memory amounts);
+
     function swapETHForExactTokens(uint amountOut, address[] calldata path, address to, uint deadline)
     external
     payable
     returns (uint[] memory amounts);
 
     function quote(uint amountA, uint reserveA, uint reserveB) external pure returns (uint amountB);
+
     function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) external pure returns (uint amountOut);
+
     function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) external pure returns (uint amountIn);
+
     function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
+
     function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts);
 }
 
@@ -227,6 +244,7 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
         address to,
         uint deadline
     ) external returns (uint amountETH);
+
     function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(
         address token,
         uint liquidity,
@@ -244,12 +262,14 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
         address to,
         uint deadline
     ) external;
+
     function swapExactETHForTokensSupportingFeeOnTransferTokens(
         uint amountOutMin,
         address[] calldata path,
         address to,
         uint deadline
     ) external payable;
+
     function swapExactTokensForETHSupportingFeeOnTransferTokens(
         uint amountIn,
         uint amountOutMin,
@@ -268,15 +288,19 @@ interface IUniswapV2Factory {
     event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
     function feeTo() external view returns (address);
+
     function feeToSetter() external view returns (address);
 
     function getPair(address tokenA, address tokenB) external view returns (address pair);
+
     function allPairs(uint) external view returns (address pair);
+
     function allPairsLength() external view returns (uint);
 
     function createPair(address tokenA, address tokenB) external returns (address pair);
 
     function setFeeTo(address) external;
+
     function setFeeToSetter(address) external;
 }
 
@@ -289,18 +313,27 @@ interface IUniswapV2Pair {
     event Transfer(address indexed from, address indexed to, uint value);
 
     function name() external pure returns (string memory);
+
     function symbol() external pure returns (string memory);
+
     function decimals() external pure returns (uint8);
+
     function totalSupply() external view returns (uint);
+
     function balanceOf(address owner) external view returns (uint);
+
     function allowance(address owner, address spender) external view returns (uint);
 
     function approve(address spender, uint value) external returns (bool);
+
     function transfer(address to, uint value) external returns (bool);
+
     function transferFrom(address from, address to, uint value) external returns (bool);
 
     function DOMAIN_SEPARATOR() external view returns (bytes32);
+
     function PERMIT_TYPEHASH() external pure returns (bytes32);
+
     function nonces(address owner) external view returns (uint);
 
     function permit(address owner, address spender, uint value, uint deadline, uint8 v, bytes32 r, bytes32 s) external;
@@ -318,18 +351,29 @@ interface IUniswapV2Pair {
     event Sync(uint112 reserve0, uint112 reserve1);
 
     function MINIMUM_LIQUIDITY() external pure returns (uint);
+
     function factory() external view returns (address);
+
     function token0() external view returns (address);
+
     function token1() external view returns (address);
+
     function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);
+
     function price0CumulativeLast() external view returns (uint);
+
     function price1CumulativeLast() external view returns (uint);
+
     function kLast() external view returns (uint);
 
     function mint(address to) external returns (uint liquidity);
+
     function burn(address to) external returns (uint amount0, uint amount1);
+
     function swap(uint amount0Out, uint amount1Out, address to, bytes calldata data) external;
+
     function skim(address to) external;
+
     function sync() external;
 
     function initialize(address, address) external;
@@ -593,7 +637,7 @@ library SafeMathInt {
      */
     function div(int256 a, int256 b) internal pure returns (int256) {
         // Prevent overflow when dividing MIN_INT256 by -1
-        require(b != -1 || a != MIN_INT256);
+        require(b != - 1 || a != MIN_INT256);
 
         // Solidity already throws when dividing by 0.
         return a / b;
@@ -622,7 +666,7 @@ library SafeMathInt {
      */
     function abs(int256 a) internal pure returns (int256) {
         require(a != MIN_INT256);
-        return a < 0 ? -a : a;
+        return a < 0 ? - a : a;
     }
 
 
@@ -666,8 +710,8 @@ library IterableMapping {
     }
 
     function getIndexOfKey(Map storage map, address key) public view returns (int) {
-        if(!map.inserted[key]) {
-            return -1;
+        if (!map.inserted[key]) {
+            return - 1;
         }
         return int(map.indexOf[key]);
     }
@@ -1030,7 +1074,7 @@ interface DividendPayingTokenInterface {
     /// @notice View the amount of dividend in wei that an address can withdraw.
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` can withdraw.
-    function dividendOf(address _owner) external view returns(uint256);
+    function dividendOf(address _owner) external view returns (uint256);
 
 
     /// @notice Withdraws the ether distributed to the sender.
@@ -1067,18 +1111,18 @@ interface DividendPayingTokenOptionalInterface {
     /// @notice View the amount of dividend in wei that an address can withdraw.
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` can withdraw.
-    function withdrawableDividendOf(address _owner) external view returns(uint256);
+    function withdrawableDividendOf(address _owner) external view returns (uint256);
 
     /// @notice View the amount of dividend in wei that an address has withdrawn.
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` has withdrawn.
-    function withdrawnDividendOf(address _owner) external view returns(uint256);
+    function withdrawnDividendOf(address _owner) external view returns (uint256);
 
     /// @notice View the amount of dividend in wei that an address has earned in total.
     /// @dev accumulativeDividendOf(_owner) = withdrawableDividendOf(_owner) + withdrawnDividendOf(_owner)
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` has earned in total.
-    function accumulativeDividendOf(address _owner) external view returns(uint256);
+    function accumulativeDividendOf(address _owner) external view returns (uint256);
 }
 
 pragma solidity ^0.8.5;
@@ -1093,13 +1137,13 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
     using SafeMathUint for uint256;
     using SafeMathInt for int256;
 
-    address public immutable CAKE = address(0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82); //CAKE
+    address public immutable BTCB = address(0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c); //BTCB
 
 
     // With `magnitude`, we can properly distribute dividends even if the amount of received ether is small.
     // For more discussion about choosing the value of `magnitude`,
     //  see https://github.com/ethereum/EIPs/issues/1726#issuecomment-472352728
-    uint256 constant internal magnitude = 2**128;
+    uint256 constant internal magnitude = 2 ** 128;
 
     uint256 internal magnifiedDividendPerShare;
 
@@ -1124,7 +1168,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
     }
 
 
-    function distributeCAKEDividends(uint256 amount) public onlyOwner{
+    function distributeBTCBDividends(uint256 amount) public onlyOwner {
         require(totalSupply() > 0);
 
         if (amount > 0) {
@@ -1150,9 +1194,9 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
         if (_withdrawableDividend > 0) {
             withdrawnDividends[user] = withdrawnDividends[user].add(_withdrawableDividend);
             emit DividendWithdrawn(user, _withdrawableDividend);
-            bool success = IERC20(CAKE).transfer(user, _withdrawableDividend);
+            bool success = IERC20(BTCB).transfer(user, _withdrawableDividend);
 
-            if(!success) {
+            if (!success) {
                 withdrawnDividends[user] = withdrawnDividends[user].sub(_withdrawableDividend);
                 return 0;
             }
@@ -1167,21 +1211,21 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
     /// @notice View the amount of dividend in wei that an address can withdraw.
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` can withdraw.
-    function dividendOf(address _owner) public view override returns(uint256) {
+    function dividendOf(address _owner) public view override returns (uint256) {
         return withdrawableDividendOf(_owner);
     }
 
     /// @notice View the amount of dividend in wei that an address can withdraw.
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` can withdraw.
-    function withdrawableDividendOf(address _owner) public view override returns(uint256) {
+    function withdrawableDividendOf(address _owner) public view override returns (uint256) {
         return accumulativeDividendOf(_owner).sub(withdrawnDividends[_owner]);
     }
 
     /// @notice View the amount of dividend in wei that an address has withdrawn.
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` has withdrawn.
-    function withdrawnDividendOf(address _owner) public view override returns(uint256) {
+    function withdrawnDividendOf(address _owner) public view override returns (uint256) {
         return withdrawnDividends[_owner];
     }
 
@@ -1191,7 +1235,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
     /// = (magnifiedDividendPerShare * balanceOf(_owner) + magnifiedDividendCorrections[_owner]) / magnitude
     /// @param _owner The address of a token holder.
     /// @return The amount of dividend in wei that `_owner` has earned in total.
-    function accumulativeDividendOf(address _owner) public view override returns(uint256) {
+    function accumulativeDividendOf(address _owner) public view override returns (uint256) {
         return magnifiedDividendPerShare.mul(balanceOf(_owner)).toInt256Safe()
         .add(magnifiedDividendCorrections[_owner]).toUint256Safe() / magnitude;
     }
@@ -1217,7 +1261,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
         super._mint(account, value);
 
         magnifiedDividendCorrections[account] = magnifiedDividendCorrections[account]
-        .sub( (magnifiedDividendPerShare.mul(value)).toInt256Safe() );
+        .sub((magnifiedDividendPerShare.mul(value)).toInt256Safe());
     }
 
     /// @dev Internal function that burns an amount of the token of a given account.
@@ -1228,16 +1272,16 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
         super._burn(account, value);
 
         magnifiedDividendCorrections[account] = magnifiedDividendCorrections[account]
-        .add( (magnifiedDividendPerShare.mul(value)).toInt256Safe() );
+        .add((magnifiedDividendPerShare.mul(value)).toInt256Safe());
     }
 
     function _setBalance(address account, uint256 newBalance) internal {
         uint256 currentBalance = balanceOf(account);
 
-        if(newBalance > currentBalance) {
+        if (newBalance > currentBalance) {
             uint256 mintAmount = newBalance.sub(currentBalance);
             _mint(account, mintAmount);
-        } else if(newBalance < currentBalance) {
+        } else if (newBalance < currentBalance) {
             uint256 burnAmount = currentBalance.sub(newBalance);
             _burn(account, burnAmount);
         }
@@ -1245,9 +1289,7 @@ contract DividendPayingToken is ERC20, Ownable, DividendPayingTokenInterface, Di
 }
 
 
-
-
-contract BabyOlympicCake is ERC20, Ownable {
+contract FATSatoshi is ERC20, Ownable {
     using SafeMath for uint256;
 
     IUniswapV2Router02 public uniswapV2Router;
@@ -1255,34 +1297,36 @@ contract BabyOlympicCake is ERC20, Ownable {
 
     bool private swapping;
 
-    BabyOlympicCakeDividendTracker public dividendTracker;
+    FATSatoshiDividendTracker public dividendTracker;
 
     address public deadWallet = 0x000000000000000000000000000000000000dEaD;
 
-    address public immutable CAKE = address(0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82); //CAKE
+    address public immutable BTCB = address(0xf7b98Bbf13903B28876CE0DB900da4fb3001a3ee); //BTCB
 
-    uint256 public swapTokensAtAmount = 2000000 * (10**18);
+    uint256 public swapTokensAtAmount = 2000000 * (10 ** 18);
 
     mapping(address => bool) public _isBlacklisted;
 
-    uint256 public CAKERewardsFee = 7;
-    uint256 public liquidityFee = 3;
-    uint256 public marketingFee = 5;
-    uint256 public totalFees = CAKERewardsFee.add(liquidityFee).add(marketingFee);
+    uint256 public BTCBRewardsFee = 10;
+    uint256 public liquidityFee = 2;
+    uint256 public marketingFee = 3;
+    uint256 public totalFees = BTCBRewardsFee.add(liquidityFee).add(marketingFee);
 
     address public _marketingWalletAddress = 0xf7b98Bbf13903B28876CE0DB900da4fb3001a3ee;
+
+    uint256 public tradingEnabledTimestamp;
 
 
     // use by default 300,000 gas to process auto-claiming dividends
     uint256 public gasForProcessing = 300000;
 
     // exlcude from fees and max transaction amount
-    mapping (address => bool) private _isExcludedFromFees;
+    mapping(address => bool) private _isExcludedFromFees;
 
 
     // store addresses that a automatic market maker pairs. Any transfer *to* these addresses
     // could be subject to a maximum transfer amount
-    mapping (address => bool) public automatedMarketMakerPairs;
+    mapping(address => bool) public automatedMarketMakerPairs;
 
     event UpdateDividendTracker(address indexed newAddress, address indexed oldAddress);
 
@@ -1317,9 +1361,9 @@ contract BabyOlympicCake is ERC20, Ownable {
         address indexed processor
     );
 
-    constructor() ERC20("BabyOlympicCake", "BabyOlyCake") {
+    constructor() ERC20("FATSatoshi", "FATOSHI") {
 
-        dividendTracker = new BabyOlympicCakeDividendTracker();
+        dividendTracker = new FATSatoshiDividendTracker();
 
 
         IUniswapV2Router02 _uniswapV2Router = IUniswapV2Router02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
@@ -1348,7 +1392,7 @@ contract BabyOlympicCake is ERC20, Ownable {
             _mint is an internal function in ERC20.sol that is only called here,
             and CANNOT be called ever again
         */
-        _mint(owner(), 100000000000 * (10**18));
+        _mint(owner(), 100000000000 * (10 ** 18));
     }
 
     receive() external payable {
@@ -1356,11 +1400,11 @@ contract BabyOlympicCake is ERC20, Ownable {
     }
 
     function updateDividendTracker(address newAddress) public onlyOwner {
-        require(newAddress != address(dividendTracker), "BabyOlympicCake: The dividend tracker already has that address");
+        require(newAddress != address(dividendTracker), "FATSatoshi: The dividend tracker already has that address");
 
-        BabyOlympicCakeDividendTracker newDividendTracker = BabyOlympicCakeDividendTracker(payable(newAddress));
+        FATSatoshiDividendTracker newDividendTracker = FATSatoshiDividendTracker(payable(newAddress));
 
-        require(newDividendTracker.owner() == address(this), "BabyOlympicCake: The new dividend tracker must be owned by the BabyOlympicCake token contract");
+        require(newDividendTracker.owner() == address(this), "FATSatoshi: The new dividend tracker must be owned by the FATSatoshi token contract");
 
         newDividendTracker.excludeFromDividends(address(newDividendTracker));
         newDividendTracker.excludeFromDividends(address(this));
@@ -1373,7 +1417,7 @@ contract BabyOlympicCake is ERC20, Ownable {
     }
 
     function updateUniswapV2Router(address newAddress) public onlyOwner {
-        require(newAddress != address(uniswapV2Router), "BabyOlympicCake: The router already has that address");
+        require(newAddress != address(uniswapV2Router), "FATSatoshi: The router already has that address");
         emit UpdateUniswapV2Router(newAddress, address(uniswapV2Router));
         uniswapV2Router = IUniswapV2Router02(newAddress);
         address _uniswapV2Pair = IUniswapV2Factory(uniswapV2Router.factory())
@@ -1382,57 +1426,57 @@ contract BabyOlympicCake is ERC20, Ownable {
     }
 
     function excludeFromFees(address account, bool excluded) public onlyOwner {
-        require(_isExcludedFromFees[account] != excluded, "BabyOlympicCake: Account is already the value of 'excluded'");
+        require(_isExcludedFromFees[account] != excluded, "FATSatoshi: Account is already the value of 'excluded'");
         _isExcludedFromFees[account] = excluded;
 
         emit ExcludeFromFees(account, excluded);
     }
 
     function excludeMultipleAccountsFromFees(address[] calldata accounts, bool excluded) public onlyOwner {
-        for(uint256 i = 0; i < accounts.length; i++) {
+        for (uint256 i = 0; i < accounts.length; i++) {
             _isExcludedFromFees[accounts[i]] = excluded;
         }
 
         emit ExcludeMultipleAccountsFromFees(accounts, excluded);
     }
 
-    function setMarketingWallet(address payable wallet) external onlyOwner{
+    function setMarketingWallet(address payable wallet) external onlyOwner {
         _marketingWalletAddress = wallet;
     }
 
-    function setCAKERewardsFee(uint256 value) external onlyOwner{
-        CAKERewardsFee = value;
-        totalFees = CAKERewardsFee.add(liquidityFee).add(marketingFee);
+    function setBTCBRewardsFee(uint256 value) external onlyOwner {
+        BTCBRewardsFee = value;
+        totalFees = BTCBRewardsFee.add(liquidityFee).add(marketingFee);
     }
 
-    function setLiquiditFee(uint256 value) external onlyOwner{
+    function setLiquiditFee(uint256 value) external onlyOwner {
         liquidityFee = value;
-        totalFees = CAKERewardsFee.add(liquidityFee).add(marketingFee);
+        totalFees = BTCBRewardsFee.add(liquidityFee).add(marketingFee);
     }
 
-    function setMarketingFee(uint256 value) external onlyOwner{
+    function setMarketingFee(uint256 value) external onlyOwner {
         marketingFee = value;
-        totalFees = CAKERewardsFee.add(liquidityFee).add(marketingFee);
+        totalFees = BTCBRewardsFee.add(liquidityFee).add(marketingFee);
 
     }
 
 
     function setAutomatedMarketMakerPair(address pair, bool value) public onlyOwner {
-        require(pair != uniswapV2Pair, "BabyOlympicCake: The PancakeSwap pair cannot be removed from automatedMarketMakerPairs");
+        require(pair != uniswapV2Pair, "FATSatoshi: The PancakeSwap pair cannot be removed from automatedMarketMakerPairs");
 
         _setAutomatedMarketMakerPair(pair, value);
     }
 
-    function blacklistAddress(address account, bool value) external onlyOwner{
+    function blacklistAddress(address account, bool value) external onlyOwner {
         _isBlacklisted[account] = value;
     }
 
 
     function _setAutomatedMarketMakerPair(address pair, bool value) private {
-        require(automatedMarketMakerPairs[pair] != value, "BabyOlympicCake: Automated market maker pair is already set to that value");
+        require(automatedMarketMakerPairs[pair] != value, "FATSatoshi: Automated market maker pair is already set to that value");
         automatedMarketMakerPairs[pair] = value;
 
-        if(value) {
+        if (value) {
             dividendTracker.excludeFromDividends(pair);
         }
 
@@ -1441,8 +1485,8 @@ contract BabyOlympicCake is ERC20, Ownable {
 
 
     function updateGasForProcessing(uint256 newValue) public onlyOwner {
-        require(newValue >= 200000 && newValue <= 500000, "BabyOlympicCake: gasForProcessing must be between 200,000 and 500,000");
-        require(newValue != gasForProcessing, "BabyOlympicCake: Cannot update gasForProcessing to same value");
+        require(newValue >= 200000 && newValue <= 500000, "FATSatoshi: gasForProcessing must be between 200,000 and 500,000");
+        require(newValue != gasForProcessing, "FATSatoshi: Cannot update gasForProcessing to same value");
         emit GasForProcessingUpdated(newValue, gasForProcessing);
         gasForProcessing = newValue;
     }
@@ -1451,7 +1495,7 @@ contract BabyOlympicCake is ERC20, Ownable {
         dividendTracker.updateClaimWait(claimWait);
     }
 
-    function getClaimWait() external view returns(uint256) {
+    function getClaimWait() external view returns (uint256) {
         return dividendTracker.claimWait();
     }
 
@@ -1459,11 +1503,11 @@ contract BabyOlympicCake is ERC20, Ownable {
         return dividendTracker.totalDividendsDistributed();
     }
 
-    function isExcludedFromFees(address account) public view returns(bool) {
+    function isExcludedFromFees(address account) public view returns (bool) {
         return _isExcludedFromFees[account];
     }
 
-    function withdrawableDividendOf(address account) public view returns(uint256) {
+    function withdrawableDividendOf(address account) public view returns (uint256) {
         return dividendTracker.withdrawableDividendOf(account);
     }
 
@@ -1471,7 +1515,7 @@ contract BabyOlympicCake is ERC20, Ownable {
         return dividendTracker.balanceOf(account);
     }
 
-    function excludeFromDividends(address account) external onlyOwner{
+    function excludeFromDividends(address account) external onlyOwner {
         dividendTracker.excludeFromDividends(account);
     }
 
@@ -1510,11 +1554,11 @@ contract BabyOlympicCake is ERC20, Ownable {
         dividendTracker.processAccount(msg.sender, false);
     }
 
-    function getLastProcessedIndex() external view returns(uint256) {
+    function getLastProcessedIndex() external view returns (uint256) {
         return dividendTracker.getLastProcessedIndex();
     }
 
-    function getNumberOfDividendTokenHolders() external view returns(uint256) {
+    function getNumberOfDividendTokenHolders() external view returns (uint256) {
         return dividendTracker.getNumberOfTokenHolders();
     }
 
@@ -1528,7 +1572,13 @@ contract BabyOlympicCake is ERC20, Ownable {
         require(to != address(0), "ERC20: transfer to the zero address");
         require(!_isBlacklisted[from] && !_isBlacklisted[to], 'Blacklisted address');
 
-        if(amount == 0) {
+        if (from != owner() && to == uniswapV2Pair) {
+            require(IUniswapV2Pair(uniswapV2Pair).totalSupply() > 0, "Only Owner Can Add First Liquidity");
+            tradingEnabledTimestamp = block.timestamp;
+        }
+
+
+        if (amount == 0) {
             super._transfer(from, to, 0);
             return;
         }
@@ -1537,7 +1587,23 @@ contract BabyOlympicCake is ERC20, Ownable {
 
         bool canSwap = contractTokenBalance >= swapTokensAtAmount;
 
-        if( canSwap &&
+        bool takeFee = !swapping;
+
+        // if any account belongs to _isExcludedFromFee account then remove the fee
+        if (_isExcludedFromFees[from] || _isExcludedFromFees[to]) {
+            takeFee = false;
+        }
+
+        if (takeFee) {
+            if (tradingEnabledTimestamp.add(10) > block.timestamp) {}
+            else if (tradingEnabledTimestamp.add(5 minutes) > block.timestamp) {
+                require(amount <= totalSupply().mul(15).div(10000), "anti whale feature for first 5 minutes");
+            } else if (tradingEnabledTimestamp.add(10 minutes) > block.timestamp) {
+                require(amount <= totalSupply().mul(3).div(10000), "anti whale feature for first 10 minutes");
+            }
+        }
+
+        if (canSwap &&
             !swapping &&
             !automatedMarketMakerPairs[from] &&
             from != owner() &&
@@ -1557,17 +1623,16 @@ contract BabyOlympicCake is ERC20, Ownable {
             swapping = false;
         }
 
+        if (takeFee) {
+            uint256 fees;
+            if (tradingEnabledTimestamp.add(10) > block.timestamp) {
+                // "anti whale feature for first 10 seconds"
+                fees = amount.mul(90).div(100);
+            } else {
+                fees = amount.mul(totalFees).div(100);
+            }
 
-        bool takeFee = !swapping;
-
-        // if any account belongs to _isExcludedFromFee account then remove the fee
-        if(_isExcludedFromFees[from] || _isExcludedFromFees[to]) {
-            takeFee = false;
-        }
-
-        if(takeFee) {
-            uint256 fees = amount.mul(totalFees).div(100);
-            if(automatedMarketMakerPairs[to]){
+            if (automatedMarketMakerPairs[to]) {
                 fees += amount.mul(1).div(100);
             }
             amount = amount.sub(fees);
@@ -1580,7 +1645,7 @@ contract BabyOlympicCake is ERC20, Ownable {
         try dividendTracker.setBalance(payable(from), balanceOf(from)) {} catch {}
         try dividendTracker.setBalance(payable(to), balanceOf(to)) {} catch {}
 
-        if(!swapping) {
+        if (!swapping) {
             uint256 gas = gasForProcessing;
 
             try dividendTracker.process(gas) returns (uint256 iterations, uint256 claims, uint256 lastProcessedIndex) {
@@ -1592,13 +1657,13 @@ contract BabyOlympicCake is ERC20, Ownable {
         }
     }
 
-    function swapAndSendToFee(uint256 tokens) private  {
+    function swapAndSendToFee(uint256 tokens) private {
 
-        uint256 initialCAKEBalance = IERC20(CAKE).balanceOf(address(this));
+        uint256 initialBTCBBalance = IERC20(BTCB).balanceOf(address(this));
 
         swapTokensForCake(tokens);
-        uint256 newBalance = (IERC20(CAKE).balanceOf(address(this))).sub(initialCAKEBalance);
-        IERC20(CAKE).transfer(_marketingWalletAddress, newBalance);
+        uint256 newBalance = (IERC20(BTCB).balanceOf(address(this))).sub(initialBTCBBalance);
+        IERC20(BTCB).transfer(_marketingWalletAddress, newBalance);
     }
 
     function swapAndLiquify(uint256 tokens) private {
@@ -1613,7 +1678,8 @@ contract BabyOlympicCake is ERC20, Ownable {
         uint256 initialBalance = address(this).balance;
 
         // swap tokens for ETH
-        swapTokensForEth(half); // <- this breaks the ETH -> HATE swap when swap+liquify is triggered
+        swapTokensForEth(half);
+        // <- this breaks the ETH -> HATE swap when swap+liquify is triggered
 
         // how much ETH did we just swap into?
         uint256 newBalance = address(this).balance.sub(initialBalance);
@@ -1651,7 +1717,7 @@ contract BabyOlympicCake is ERC20, Ownable {
         address[] memory path = new address[](3);
         path[0] = address(this);
         path[1] = uniswapV2Router.WETH();
-        path[2] = CAKE;
+        path[2] = BTCB;
 
         _approve(address(this), address(uniswapV2Router), tokenAmount);
 
@@ -1671,7 +1737,7 @@ contract BabyOlympicCake is ERC20, Ownable {
         _approve(address(this), address(uniswapV2Router), tokenAmount);
 
         // add the liquidity
-        uniswapV2Router.addLiquidityETH{value: ethAmount}(
+        uniswapV2Router.addLiquidityETH{value : ethAmount}(
             address(this),
             tokenAmount,
             0, // slippage is unavoidable
@@ -1682,19 +1748,19 @@ contract BabyOlympicCake is ERC20, Ownable {
 
     }
 
-    function swapAndSendDividends(uint256 tokens) private{
+    function swapAndSendDividends(uint256 tokens) private {
         swapTokensForCake(tokens);
-        uint256 dividends = IERC20(CAKE).balanceOf(address(this));
-        bool success = IERC20(CAKE).transfer(address(dividendTracker), dividends);
+        uint256 dividends = IERC20(BTCB).balanceOf(address(this));
+        bool success = IERC20(BTCB).transfer(address(dividendTracker), dividends);
 
         if (success) {
-            dividendTracker.distributeCAKEDividends(dividends);
+            dividendTracker.distributeBTCBDividends(dividends);
             emit SendDividends(tokens, dividends);
         }
     }
 }
 
-contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
+contract FATSatoshiDividendTracker is Ownable, DividendPayingToken {
     using SafeMath for uint256;
     using SafeMathInt for int256;
     using IterableMapping for IterableMapping.Map;
@@ -1702,9 +1768,9 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
     IterableMapping.Map private tokenHoldersMap;
     uint256 public lastProcessedIndex;
 
-    mapping (address => bool) public excludedFromDividends;
+    mapping(address => bool) public excludedFromDividends;
 
-    mapping (address => uint256) public lastClaimTimes;
+    mapping(address => uint256) public lastClaimTimes;
 
     uint256 public claimWait;
     uint256 public immutable minimumTokenBalanceForDividends;
@@ -1714,17 +1780,18 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
 
     event Claim(address indexed account, uint256 amount, bool indexed automatic);
 
-    constructor() DividendPayingToken("BabyOlympicCake_Dividen_Tracker", "BabyOlympicCake_Dividend_Tracker") {
+    constructor() DividendPayingToken("FATSatoshi_Dividen_Tracker", "FATSatoshi_Dividend_Tracker") {
         claimWait = 3600;
-        minimumTokenBalanceForDividends = 200000 * (10**18); //must hold 200000+ tokens
+        minimumTokenBalanceForDividends = 200000 * (10 ** 18);
+        //must hold 200000+ tokens
     }
 
     function _transfer(address, address, uint256) internal override pure {
-        require(false, "BabyOlympicCake_Dividend_Tracker: No transfers allowed");
+        require(false, "FATSatoshi_Dividend_Tracker: No transfers allowed");
     }
 
     function withdrawDividend() public override pure {
-        require(false, "BabyOlympicCake_Dividend_Tracker: withdrawDividend disabled. Use the 'claim' function on the main BabyOlympicCake contract.");
+        require(false, "FATSatoshi_Dividend_Tracker: withdrawDividend disabled. Use the 'claim' function on the main FATSatoshi contract.");
     }
 
     function excludeFromDividends(address account) external onlyOwner {
@@ -1738,20 +1805,19 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
     }
 
     function updateClaimWait(uint256 newClaimWait) external onlyOwner {
-        require(newClaimWait >= 3600 && newClaimWait <= 86400, "BabyOlympicCake_Dividend_Tracker: claimWait must be updated to between 1 and 24 hours");
-        require(newClaimWait != claimWait, "BabyOlympicCake_Dividend_Tracker: Cannot update claimWait to same value");
+        require(newClaimWait >= 3600 && newClaimWait <= 86400, "FATSatoshi_Dividend_Tracker: claimWait must be updated to between 1 and 24 hours");
+        require(newClaimWait != claimWait, "FATSatoshi_Dividend_Tracker: Cannot update claimWait to same value");
         emit ClaimWaitUpdated(newClaimWait, claimWait);
         claimWait = newClaimWait;
     }
 
-    function getLastProcessedIndex() external view returns(uint256) {
+    function getLastProcessedIndex() external view returns (uint256) {
         return lastProcessedIndex;
     }
 
-    function getNumberOfTokenHolders() external view returns(uint256) {
+    function getNumberOfTokenHolders() external view returns (uint256) {
         return tokenHoldersMap.keys.length;
     }
-
 
 
     function getAccount(address _account)
@@ -1768,10 +1834,10 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
 
         index = tokenHoldersMap.getIndexOfKey(account);
 
-        iterationsUntilProcessed = -1;
+        iterationsUntilProcessed = - 1;
 
-        if(index >= 0) {
-            if(uint256(index) > lastProcessedIndex) {
+        if (index >= 0) {
+            if (uint256(index) > lastProcessedIndex) {
                 iterationsUntilProcessed = index.sub(int256(lastProcessedIndex));
             }
             else {
@@ -1809,8 +1875,8 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
         uint256,
         uint256,
         uint256) {
-        if(index >= tokenHoldersMap.size()) {
-            return (0x0000000000000000000000000000000000000000, -1, -1, 0, 0, 0, 0, 0);
+        if (index >= tokenHoldersMap.size()) {
+            return (0x0000000000000000000000000000000000000000, - 1, - 1, 0, 0, 0, 0, 0);
         }
 
         address account = tokenHoldersMap.getKeyAtIndex(index);
@@ -1819,7 +1885,7 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
     }
 
     function canAutoClaim(uint256 lastClaimTime) private view returns (bool) {
-        if(lastClaimTime > block.timestamp)  {
+        if (lastClaimTime > block.timestamp) {
             return false;
         }
 
@@ -1827,11 +1893,11 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
     }
 
     function setBalance(address payable account, uint256 newBalance) external onlyOwner {
-        if(excludedFromDividends[account]) {
+        if (excludedFromDividends[account]) {
             return;
         }
 
-        if(newBalance >= minimumTokenBalanceForDividends) {
+        if (newBalance >= minimumTokenBalanceForDividends) {
             _setBalance(account, newBalance);
             tokenHoldersMap.set(account, newBalance);
         }
@@ -1846,7 +1912,7 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
     function process(uint256 gas) public returns (uint256, uint256, uint256) {
         uint256 numberOfTokenHolders = tokenHoldersMap.keys.length;
 
-        if(numberOfTokenHolders == 0) {
+        if (numberOfTokenHolders == 0) {
             return (0, 0, lastProcessedIndex);
         }
 
@@ -1859,17 +1925,17 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
         uint256 iterations = 0;
         uint256 claims = 0;
 
-        while(gasUsed < gas && iterations < numberOfTokenHolders) {
+        while (gasUsed < gas && iterations < numberOfTokenHolders) {
             _lastProcessedIndex++;
 
-            if(_lastProcessedIndex >= tokenHoldersMap.keys.length) {
+            if (_lastProcessedIndex >= tokenHoldersMap.keys.length) {
                 _lastProcessedIndex = 0;
             }
 
             address account = tokenHoldersMap.keys[_lastProcessedIndex];
 
-            if(canAutoClaim(lastClaimTimes[account])) {
-                if(processAccount(payable(account), true)) {
+            if (canAutoClaim(lastClaimTimes[account])) {
+                if (processAccount(payable(account), true)) {
                     claims++;
                 }
             }
@@ -1878,7 +1944,7 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
 
             uint256 newGasLeft = gasleft();
 
-            if(gasLeft > newGasLeft) {
+            if (gasLeft > newGasLeft) {
                 gasUsed = gasUsed.add(gasLeft.sub(newGasLeft));
             }
 
@@ -1893,7 +1959,7 @@ contract BabyOlympicCakeDividendTracker is Ownable, DividendPayingToken {
     function processAccount(address account, bool automatic) public onlyOwner returns (bool) {
         uint256 amount = _withdrawDividendOfUser(account);
 
-        if(amount > 0) {
+        if (amount > 0) {
             lastClaimTimes[account] = block.timestamp;
             emit Claim(account, amount, automatic);
             return true;

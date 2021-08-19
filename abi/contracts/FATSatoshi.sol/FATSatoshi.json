@@ -295,7 +295,7 @@
   },
   {
     "inputs": [],
-    "name": "CAKE",
+    "name": "BTCB",
     "outputs": [
       {
         "internalType": "address",
@@ -308,7 +308,7 @@
   },
   {
     "inputs": [],
-    "name": "CAKERewardsFee",
+    "name": "BTCBRewardsFee",
     "outputs": [
       {
         "internalType": "uint256",
@@ -536,7 +536,7 @@
     "name": "dividendTracker",
     "outputs": [
       {
-        "internalType": "contract OlympicBabyCakeDividendTracker",
+        "internalType": "contract FATSatoshiDividendTracker",
         "name": "",
         "type": "address"
       }
@@ -907,7 +907,7 @@
         "type": "uint256"
       }
     ],
-    "name": "setCAKERewardsFee",
+    "name": "setBTCBRewardsFee",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
